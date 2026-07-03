@@ -1,0 +1,36 @@
+#!/bin/bash
+
+GREEN="\e[32m"
+CYAN="\e[36m"
+YELLOW="\e[33m"
+RED="\e[31m"
+WHITE="\e[97m"
+RESET="\e[0m"
+
+echo -e "${CYAN}"
+echo "=========================================================="
+echo "██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗"
+echo "██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║"
+echo "██████╔╝█████╗  ██║     ██║   ██║██╔██╗ ██║"
+echo "██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╗██║"
+echo "██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║"
+echo "╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝"
+echo ""
+echo "                ReconFlow v1.0"
+echo "       Reconnaissance Automation Framework"
+echo "=========================================================="
+echo -e "${RESET}"
+
+echo -e "${GREEN} Author   :${WHITE} Hariharan C"
+echo -e "${GREEN} Version  :${WHITE} 1.0.0"
+echo -e "${GREEN} GitHub   :${WHITE} https://github.com/hariharan005/ReconFlow"
+echo -e "${GREEN} License  :${WHITE} MIT"
+echo ""
+
+echo -e "${YELLOW} [*] Purpose :${WHITE} Information Gathering & Asset Discovery"
+echo -e "${YELLOW} [*] Usage   :${WHITE} Authorized Security Assessments Only"
+echo ""
+
+echo -e "${RED} ⚠ Disclaimer:${RESET} Use this tool only on systems you own or have"
+echo -e "${RED}               explicit authorization to assess.${RESET}"
+echo ""
