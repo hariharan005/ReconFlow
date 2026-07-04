@@ -12,17 +12,22 @@ function IP(){
 }
 
 function Dig(){
+    echo
     echo "=== DNS Records for $domain_name ==="
+    echo
     for type in A AAAA MX NS TXT CNAME SOA ; 
     do
 
         echo "=== $type ==="
+        echo
         dig "$domain_name" "$type" +short
+        echo
     done
 }
 
 #Call the function to get the IP address of the domain name
 {
+    echo "Dig Results for $domain_name"
     echo "Domain Name: $domain_name"
     echo "==================="
     echo
