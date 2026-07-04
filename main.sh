@@ -4,4 +4,4 @@
 source modules/Banner.sh
 
 #call the Get_IP.sh script to get the IP address of the domain name
-source modules/Get_IP.sh
+source modules/Basic_Info.sh
