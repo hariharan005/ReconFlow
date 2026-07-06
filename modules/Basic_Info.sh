@@ -1,17 +1,11 @@
 #!/bin/bash
 
-#Read the domain name from user input and store it in a variable
-read -p "Enter the Domain Name: " domain_name
-echo "Domain Name: $domain_name"
-
-output_file="Basic_Info_${domain_name}_output.txt"
-
 #Function to get the IP address of the domain name using nmap and awk 
-function IP(){
+IP(){
     nmap -sL -n $domain_name | awk '/Nmap scan report for/{print "IP: "$NF}' | tr -d '()'
 }
 
-function Dig(){
+Dig(){
     echo
     echo "=== DNS Records for $domain_name ==="
     echo
@@ -26,15 +20,17 @@ function Dig(){
 }
 
 #Call the function to get the IP address of the domain name
-{
-    echo "Dig Results for $domain_name"
-    echo "Domain Name: $domain_name"
-    echo "==================="
+Basic_Info(){
+
+    output_file="$REPORT_DIR/Basic_Info.txt"
+    {
+        echo "=== Basic Information for $domain_name ==="
+        echo
+        echo "IP Address:"
+        IP
+        echo
+        Dig
+    } | tee "$output_file"
     echo
-
-    IP
-    Dig
-} | tee "$output_file"
-
-echo
-echo "Output saved to $output_file"
+    echo "Output saved to $output_file"
+}
