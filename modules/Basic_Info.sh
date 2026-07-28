@@ -1,36 +1,61 @@
 #!/bin/bash
 
-#Function to get the IP address of the domain name using nmap and awk 
-IP(){
-    nmap -sL -n $domain_name | awk '/Nmap scan report for/{print "IP: "$NF}' | tr -d '()'
+IP() {
+    local host="$1"
+
+    echo "IP Address:"
+    nmap -sL -n "$host" | awk '/Nmap scan report for/{print "IP: "$NF}' | tr -d '()'
 }
 
-Dig(){
-    echo
-    echo "=== DNS Records for $domain_name ==="
-    echo
-    for type in A AAAA MX NS TXT CNAME SOA ; 
-    do
+Dig() {
+    local host="$1"
 
+    echo
+    echo "DNS Records:"
+    echo
+
+    for type in A AAAA MX NS TXT CNAME SOA
+    do
         echo "=== $type ==="
-        echo
-        dig "$domain_name" "$type" +short
+        dig "$host" "$type" +short
         echo
     done
 }
 
-#Call the function to get the IP address of the domain name
-Basic_Info(){
+Basic_Info() {
 
+    input_file="$REPORT_DIR/httpx_live_subdomains.txt"
     output_file="$REPORT_DIR/Basic_Info.txt"
-    {
-        echo "=== Basic Information for $domain_name ==="
-        echo
-        echo "IP Address:"
-        IP
-        echo
-        Dig
-    } | tee "$output_file"
-    echo
-    echo "Output saved to $output_file"
+
+    if [[ ! -f "$input_file" ]]; then
+        echo "[ERROR] $input_file not found."
+        return 1
+    fi
+
+    > "$output_file"
+
+    while read -r host
+    do
+        [[ -z "$host" ]] && continue
+
+        {
+            echo "====================================================="
+            echo "Host : $host"
+            echo "====================================================="
+            echo
+
+            IP "$host"
+
+            echo
+
+            Dig "$host"
+
+            echo
+            echo
+        } >> "$output_file"
+
+    done < "$input_file"
+
+    echo "Basic information saved to:"
+    echo "$output_file"
 }
