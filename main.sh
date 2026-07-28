@@ -20,6 +20,7 @@ source "$SCRIPT_DIR/modules/httpx.sh"
 source "$SCRIPT_DIR/modules/Ip_Getter.sh"
 source "$SCRIPT_DIR/modules/Port_Scanner.sh"
 source "$SCRIPT_DIR/modules/Dir_Enum.sh"
+source "$SCRIPT_DIR/modules/Parameter_Discovery.sh"
 
 # -----------------------------
 # Read Domain
@@ -71,6 +72,7 @@ run_all() {
     run_module "IP Getter" Ip_Getter
     run_module "Port Scanner" Port_Scanner
     run_module "Directory Enumeration" Dir_Enum
+    run_module "Parameter Discovery" Parameter_Discovery
 
     echo
     echo "=========================================="
@@ -99,9 +101,10 @@ do
     echo " 4. IP Getter"
     echo " 5. Port Scanner"
     echo " 6. Directory Enumeration"
-    echo " 7. Run Complete Recon"
-    echo " 8. Change Target Domain"
-    echo " 9. Exit"
+    echo " 7. Parameter Discovery"
+    echo " 8. Run Complete Recon"
+    echo " 9. Change Target Domain"
+    echo " 10. Exit"
     echo
 
     read -rp "Select Option: " option
@@ -109,16 +112,15 @@ do
     case "$option" in
 
         1)
-            run_module "Basic Information" Basic_Info
-            ;;
-
-        2)
             run_module "Subdomain Enumeration" subdomain_recon
             ;;
-
-        3)
+        2)
             run_module "HTTPX Recon" httpx_recon
             ;;
+        3)
+            run_module "Basic Information" Basic_Info
+            ;;
+            
 
         4)
             run_module "IP Getter" Ip_Getter
@@ -133,10 +135,13 @@ do
             ;;
 
         7)
+            run_module "Parameter Discovery" Parameter_Discovery
+            ;;
+        8)
             run_all
             ;;
 
-        8)
+        9)
 
             read -rp "Enter New Domain: " domain_name
 
@@ -149,7 +154,7 @@ do
 
             ;;
 
-        9)
+        10)
 
             echo
             echo "Thank you for using ReconFlow."
