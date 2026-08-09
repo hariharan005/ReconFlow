@@ -3,13 +3,29 @@
 **ReconFlow** is a modular, Bash-based reconnaissance automation framework for authorized security assessments and bug bounty hunting. It chains together industry-standard OSINT and recon tools into a single guided workflow — from subdomain enumeration to parameter discovery — and organizes every result into a clean, per-target report structure.
 
 ```
+==========================================================
 ██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗
 ██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║
 ██████╔╝█████╗  ██║     ██║   ██║██╔██╗ ██║
 ██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╗██║
 ██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║
 ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝
+
+                ReconFlow v1.0
        Reconnaissance Automation Framework
+==========================================================
+
+ Author   : Hariharan C
+ Version  : 1.0.0
+ GitHub   : https://github.com/hariharan005/ReconFlow
+ License  : MIT
+
+ [*] Purpose : Information Gathering & Asset Discovery
+ [*] Usage   : Authorized Security Assessments Only
+
+ ⚠ Disclaimer: Use this tool only on systems you own or have
+               explicit authorization to assess.
+
 ```
 
 > ⚠️ **Legal Notice:** ReconFlow is intended strictly for authorized security testing — penetration tests, bug bounty programs, and CTFs where you have explicit permission to test the target. Running these modules (especially port scanning and fuzzing) against systems you do not own or have authorization to assess is illegal. Use responsibly.
@@ -172,40 +188,6 @@ Target : example.com
 
 **Recommended first run:** run option `1` (Subdomain Enumeration) then `2` (HTTPX Recon) before anything else — every other module reads from the live-hosts file that HTTPX Recon produces.
 
-## Output Structure
-
-All results are written under `reports/<domain_name>/`:
-
-```
-reports/example.com/
-├── Subdomains.txt                  # Raw + merged subdomain list
-├── httpx_results.txt               # Full httpx output (status, title, tech, server, IP)
-├── httpx_live_subdomains.txt       # Clean list of live hosts (input for all later stages)
-├── Basic_Info.txt                  # Per-host IP + DNS records
-├── alldomain-ip.txt                # Host → IP mapping
-├── port_scan_results.txt           # nmap full port/service/OS scan
-├── Dirsearch/                      # Per-host dirsearch output
-├── FFUF/
-│   └── <host>/
-│       ├── directories.json
-│       ├── files.json
-│       ├── backups.json
-│       ├── api.json
-│       ├── graphql.json
-│       └── extensions.json
-├── hakrawler-urls.txt
-├── urls.txt                        # katana output
-├── gospider-urls/
-├── gau-urls.txt
-└── Parameter_Discovery/
-    ├── gau/
-    ├── waybackurls/
-    ├── katana/
-    ├── paramspider/
-    ├── arjun/
-    ├── all_parameter_urls.txt      # merged, de-duplicated URLs
-    └── parameter_urls.txt          # URLs containing query parameters
-```
 
 ## Project Structure
 
