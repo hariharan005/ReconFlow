@@ -1,12 +1,4 @@
 #!/bin/bash
-'if [[ $EUID -ne 0 ]]; then
-    echo "[*] Requesting administrator privileges..."
-    exec sudo "$0" "$@"
-fi'
-
-
-echo "[+] Running as root."
-
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -22,6 +14,8 @@ source "$SCRIPT_DIR/modules/Port_Scanner.sh"
 source "$SCRIPT_DIR/modules/Dir_Enum.sh"
 source "$SCRIPT_DIR/modules/Crawling.sh"
 source "$SCRIPT_DIR/modules/Parameter_Discovery.sh"
+source "$SCRIPT_DIR/modules/JS_Enum.sh"
+source "$SCRIPT_DIR/modules/Screenshots.sh"
 
 # -----------------------------
 # Read Domain
@@ -75,6 +69,8 @@ run_all() {
     run_module "Directory Enumeration" Dir_Enum
     run_module "Crawling" crawling
     run_module "Parameter Discovery" Parameter_Discovery
+    run_module "JavaScript Enumeration" JS_Enum
+    run_module "Screenshot Enumeration" Screenshot_Enum
 
     echo
     echo "=========================================="
@@ -105,9 +101,11 @@ do
     echo " 6. Directory Enumeration"
     echo " 7. Crawling"
     echo " 8. Parameter Discovery"
-    echo " 9. Run Complete Recon"
-    echo " 10. Change Target Domain"
-    echo " 11. Exit"
+    echo " 9. JavaScript Enumeration"
+    echo " 10. Screenshot Enumeration"
+    echo " 11. Run All Recon"
+    echo " 12. Change Target Domain"
+    echo " 13. Exit"
     echo
 
     read -rp "Select Option: " option
@@ -144,35 +142,30 @@ do
             run_module "Parameter Discovery" Parameter_Discovery
             ;;
         9)
-            run_all
+            run_module "JavaScript Enumeration" JS_Enum
             ;;
 
         10)
-
+            run_module "Screenshot Enumeration" Screenshot_Enum
+            ;;
+        11)
+            run_all
+            ;;
+        12)
             read -rp "Enter New Domain: " domain_name
-
             REPORT_DIR="reports/$domain_name"
-
             mkdir -p "$REPORT_DIR"
-
             export domain_name
             export REPORT_DIR
-
             ;;
-
-        11)
-
+        13)
             echo
             echo "Thank you for using ReconFlow."
             exit 0
             ;;
-
         *)
-
             echo
             echo "Invalid Option!"
             ;;
-
     esac
-
 done
