@@ -51,6 +51,7 @@ declare -A GO_TOOLS=(
     [katana]="github.com/projectdiscovery/katana/cmd/katana@latest"
     [gau]="github.com/lc/gau/v2/cmd/gau@latest"
     [waybackurls]="github.com/tomnomnom/waybackurls@latest"
+    [gowitness]="github.com/sensepost/gowitness@latest"
 )
 
 # name -> pipx package spec

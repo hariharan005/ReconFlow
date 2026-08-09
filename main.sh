@@ -16,6 +16,7 @@ source "$SCRIPT_DIR/modules/Crawling.sh"
 source "$SCRIPT_DIR/modules/Parameter_Discovery.sh"
 source "$SCRIPT_DIR/modules/JS_Enum.sh"
 source "$SCRIPT_DIR/modules/Screenshots.sh"
+source "$SCRIPT_DIR/modules/Vuln_Scan.sh"
 
 # -----------------------------
 # Read Domain
@@ -103,9 +104,10 @@ do
     echo " 8. Parameter Discovery"
     echo " 9. JavaScript Enumeration"
     echo " 10. Screenshot Enumeration"
-    echo " 11. Run All Recon"
-    echo " 12. Change Target Domain"
-    echo " 13. Exit"
+    echo " 11. Vulnerability Scanning"
+    echo " 12. Run All Recon"
+    echo " 13. Change Target Domain"
+    echo " 14. Exit"
     echo
 
     read -rp "Select Option: " option
@@ -149,16 +151,19 @@ do
             run_module "Screenshot Enumeration" Screenshot_Enum
             ;;
         11)
-            run_all
+            run_module "Vulnerability Scanning" Vuln_Scan
             ;;
         12)
+            run_all
+            ;;
+        13)
             read -rp "Enter New Domain: " domain_name
             REPORT_DIR="reports/$domain_name"
             mkdir -p "$REPORT_DIR"
             export domain_name
             export REPORT_DIR
             ;;
-        13)
+        14)
             echo
             echo "Thank you for using ReconFlow."
             exit 0
