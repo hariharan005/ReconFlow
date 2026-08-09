@@ -1,0 +1,23 @@
+# Scan output / recon results (target-specific, generated at runtime)
+reports/
+
+# Logs
+*.log
+
+# Temp / working files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Environment / secrets
+.env
+*.key
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/

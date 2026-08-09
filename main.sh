@@ -1,9 +1,9 @@
 #!/bin/bash
-
-if [[ $EUID -ne 0 ]]; then
+'if [[ $EUID -ne 0 ]]; then
     echo "[*] Requesting administrator privileges..."
     exec sudo "$0" "$@"
-fi
+fi'
+
 
 echo "[+] Running as root."
 
@@ -20,6 +20,7 @@ source "$SCRIPT_DIR/modules/httpx.sh"
 source "$SCRIPT_DIR/modules/Ip_Getter.sh"
 source "$SCRIPT_DIR/modules/Port_Scanner.sh"
 source "$SCRIPT_DIR/modules/Dir_Enum.sh"
+source "$SCRIPT_DIR/modules/Crawling.sh"
 source "$SCRIPT_DIR/modules/Parameter_Discovery.sh"
 
 # -----------------------------
@@ -72,6 +73,7 @@ run_all() {
     run_module "IP Getter" Ip_Getter
     run_module "Port Scanner" Port_Scanner
     run_module "Directory Enumeration" Dir_Enum
+    run_module "Crawling" crawling
     run_module "Parameter Discovery" Parameter_Discovery
 
     echo
@@ -101,10 +103,11 @@ do
     echo " 4. IP Getter"
     echo " 5. Port Scanner"
     echo " 6. Directory Enumeration"
-    echo " 7. Parameter Discovery"
-    echo " 8. Run Complete Recon"
-    echo " 9. Change Target Domain"
-    echo " 10. Exit"
+    echo " 7. Crawling"
+    echo " 8. Parameter Discovery"
+    echo " 9. Run Complete Recon"
+    echo " 10. Change Target Domain"
+    echo " 11. Exit"
     echo
 
     read -rp "Select Option: " option
@@ -135,13 +138,16 @@ do
             ;;
 
         7)
-            run_module "Parameter Discovery" Parameter_Discovery
+            run_module "Crawling" crawling
             ;;
         8)
+            run_module "Parameter Discovery" Parameter_Discovery
+            ;;
+        9)
             run_all
             ;;
 
-        9)
+        10)
 
             read -rp "Enter New Domain: " domain_name
 
@@ -154,7 +160,7 @@ do
 
             ;;
 
-        10)
+        11)
 
             echo
             echo "Thank you for using ReconFlow."
