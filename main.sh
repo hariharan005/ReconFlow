@@ -21,7 +21,7 @@ source "$SCRIPT_DIR/modules/Vuln_Scan.sh"
 # -----------------------------
 # Read Domain
 # -----------------------------
-read -rp "Enter the Domain Name: " domain_name
+read -erp "Enter the Domain Name: " domain_name
 
 REPORT_DIR="reports/$domain_name"
 
@@ -72,7 +72,8 @@ run_all() {
     run_module "Parameter Discovery" Parameter_Discovery
     run_module "JavaScript Enumeration" JS_Enum
     run_module "Screenshot Enumeration" Screenshot_Enum
-
+    run_module "Vulnerability Scanning" Vuln_Scan
+    
     echo
     echo "=========================================="
     echo "Recon Completed"
